@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio-gateway
+  namespace: argocd
+  labels:
+    "argo-cd": "true"
+    "helm": "true"
+    "system": "true"
+spec:
+  project: default
+  source:
+    chart: gateway
+    targetRevision: 1.23.1
+    repoURL: https://istio-release.storage.googleapis.com/charts
+    helm:
+      releaseName: istio-gateway
+      valuesObject:
+        defaults:
+          service:
+            type: NodePort
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: istio-ingress
+  ignoreDifferences:
+  - group: admissionregistration.k8s.io
+    kind: ValidatingWebhookConfiguration
+    jsonPointers:
+    - /webhooks/0/clientConfig/caBundle    # Example field to ignore
+    - /webhooks/0/failurePolicy            # Example diff causing issues
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

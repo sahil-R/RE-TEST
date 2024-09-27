@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Click Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        #count {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Button Click Counter</h1>
+    <button onclick="incrementClick()">Click Me!</button>
+    <div id="count">Button Clicks: {{clicks}}</div>
+
+    <script>
+        function incrementClick() {
+            fetch('/button-click', {method: "POST"})
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('count').innerText = `Button Clicks: ${data.click_count}`;
+                });
+        }
+    </script>
+</body>
+</html>

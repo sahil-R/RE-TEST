@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mongo
+  namespace: argocd
+  labels:
+    "argo-cd": "true"
+    "helm": "true"
+    "system": "false"
+spec:
+  project: default
+  source:
+    chart: mongodb
+    targetRevision: 1.27.0
+    repoURL: https://mongodb.github.io/helm-charts
+    helm:
+      releaseName: mongo 
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: mongo
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
+    

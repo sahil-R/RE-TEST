@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+        sidecar.istio.io/inject: "true"
+    spec:
+      # nodeSelector:
+      #   app-type: go-stage
+      containers:
+      - name: my-istio-test
+        image: python:3.9-alpine
