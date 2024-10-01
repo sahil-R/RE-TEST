@@ -10,9 +10,9 @@ metadata:
 spec:
   project: default
   source:
-    chart: gateway
-    targetRevision: 1.23.1
-    repoURL: https://istio-release.storage.googleapis.com/charts
+    targetRevision: HEAD
+    repoURL: https://github.com/sahil-R/RE-TEST.git
+    path: helm-charts/istio/gateway
     helm:
       releaseName: istio-gateway
       valuesObject:

@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istiod
+  name: kiali
   namespace: argocd
   labels:
     "argo-cd": "true"
@@ -12,18 +12,12 @@ spec:
   source:
     targetRevision: HEAD
     repoURL: https://github.com/sahil-R/RE-TEST.git
-    path: helm-charts/istio/istiod
+    path: helm-charts/istio/kiali
     helm:
-      releaseName: istiod
+      releaseName: kiali
   destination:
     server: "https://kubernetes.default.svc"
     namespace: istio-system
-  ignoreDifferences:
-  - group: admissionregistration.k8s.io
-    kind: ValidatingWebhookConfiguration
-    jsonPointers:
-    - /webhooks/0/clientConfig/caBundle    # Example field to ignore
-    - /webhooks/0/failurePolicy  
   syncPolicy:
     automated:
       prune: true
