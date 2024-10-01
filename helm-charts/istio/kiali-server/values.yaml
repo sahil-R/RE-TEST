@@ -23,7 +23,7 @@ additional_display_details:
   icon_annotation: kiali.io/api-type
   title: API Documentation
 
-istio_namespace: "" # default is where Kiali is installed
+istio_namespace: "istio-system" # default is where Kiali is installed
 
 auth:
   openid: {}
@@ -62,8 +62,8 @@ deployment:
   image_version: v1.89.3 # version like "v1.39" (see: https://quay.io/repository/kiali/kiali?tab=tags) or a digest hash
   ingress:
     additional_labels: {}
-    class_name: "nginx"
-    #enabled:
+    class_name: "istio"
+    enabled: true
     override_yaml:
       metadata: {}
   instance_name: "kiali"

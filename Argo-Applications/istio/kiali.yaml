@@ -12,7 +12,7 @@ spec:
   source:
     targetRevision: HEAD
     repoURL: https://github.com/sahil-R/RE-TEST.git
-    path: helm-charts/istio/kiali
+    path: helm-charts/istio/kiali-server
     helm:
       releaseName: kiali
   destination:
