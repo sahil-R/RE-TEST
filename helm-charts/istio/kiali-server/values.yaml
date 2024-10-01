@@ -62,10 +62,14 @@ deployment:
   image_version: v1.89.3 # version like "v1.39" (see: https://quay.io/repository/kiali/kiali?tab=tags) or a digest hash
   ingress:
     additional_labels: {}
-    class_name: "istio"
+    class_name: ""
     enabled: true
     override_yaml:
-      metadata: {}
+      metadata:
+        annotations:
+          kubernetes.io/ingress.class: "istio"
+          nginx.ingress.kubernetes.io/ssl-redirect: "false"
+          nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
   instance_name: "kiali"
   logger:
     log_format: "text"
